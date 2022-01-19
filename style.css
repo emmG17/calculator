@@ -1,0 +1,23 @@
+.calculator {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 2px;
+    width: 30vw;
+}
+
+.calculator #display {
+   grid-area: 1 / 1 / 2 / -1; 
+}
+
+#display div {
+    border: none;
+}
+
+.calculator div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    height: calc(30vw/4);
+}
