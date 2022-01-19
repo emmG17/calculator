@@ -1,20 +1,29 @@
+html {
+    box-sizing: border-box;
+}
+
 .calculator {
+    width: 30vw;
+}
+
+.calculator-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
     gap: 2px;
-    width: 30vw;
 }
 
-.calculator #display {
-   grid-area: 1 / 1 / 2 / -1; 
+#display {
+   height: calc(30vw/4);
+   border: 1px solid black;
+   margin-bottom: 2px;
 }
 
 #display div {
     border: none;
 }
 
-.calculator div {
+.calculator-grid div {
     display: flex;
     justify-content: center;
     align-items: center;
