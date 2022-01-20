@@ -63,15 +63,23 @@ function parseInput() {
     let a = groups ? groups[1] : null;
     let b = groups ? groups[3] : null;
     let op = groups ? parseOperator(groups[2]) : null;
-    if (a) {
+    if (a && !currentExpression.a) {
         currentExpression.setFirstNumber(a);
     }
-    if (b) {
+    if (b && !currentExpression.b) {
         currentExpression.setSecondNumber(b);
     }
-    if (op) {
+    if (op && !currentExpression.operator) {
         currentExpression.setOperator(op);
     }
+}
+
+function solveCurrentNode() {
+    let result = currentExpression.evaluateExpression();
+    currentExpression.setFirstNumber(result);
+    delete currentExpression.b;
+    delete currentExpression.operator;
+    writeValue(result, "w");
 }
 
 const storedValue = document.querySelector("#display .stored-value");
@@ -93,36 +101,31 @@ const currentExpression = {
         this.operator = value;
     },
     evaluateExpression: function () {
-        this.result = operate(this.operator, this.a, this.b);
-        return this.result;
+        let result = operate(this.operator, this.a, this.b);
+        return result;
     },
 };
 
 //Clear the display
-clearButton.addEventListener("click", () => {
-    clear();
-});
+clearButton.addEventListener("click", clear);
 
-equalsButton.addEventListener("click", () => {
-    let result = currentExpression.evaluateExpression();
-    writeValue(result, "w");
-});
+equalsButton.addEventListener("click", solveCurrentNode);
 
 numberButtons.forEach((number) => {
     number.addEventListener("click", () => {
         let value = number.getAttribute("data-value");
         writeValue(value);
         parseInput();
-        console.table(currentExpression)
-        
     });
 });
 
 operatorButtons.forEach((operator) => {
     operator.addEventListener("click", () => {
-        let opString = operator.textContent;        
+        if (currentExpression.operator) {
+            solveCurrentNode();
+        }
+        let opString = operator.textContent;
         writeValue(opString);
         parseInput();
-        console.table(currentExpression)
     });
 });
