@@ -66,7 +66,7 @@ function parseInput() {
     if (a && !currentExpression.a) {
         currentExpression.setFirstNumber(a);
     }
-    if (b && !currentExpression.b) {
+    if (b) {
         currentExpression.setSecondNumber(b);
     }
     if (op && !currentExpression.operator) {
