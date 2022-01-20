@@ -39,20 +39,10 @@ body {
 }
 
 #display .current-input {
+    height: 100%;
     display: flex;
     justify-content: end;
     align-items: center;
-    height: 60%;
-}
-
-#display .stored-value {
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    font-size: 1.4rem;
-    font-weight: bold;
-    height: 40%;
-    color: #555
 }
 
 .calculator-grid div {

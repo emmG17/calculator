@@ -99,7 +99,6 @@ function solveCurrentNode() {
     writeValue(result, "w");
 }
 
-const storedValue = document.querySelector("#display .stored-value");
 const displayValue = document.querySelector("#display .current-input");
 const numberButtons = document.querySelectorAll(".calculator-grid .number");
 const operatorButtons = document.querySelectorAll(".calculator-grid .operator");
