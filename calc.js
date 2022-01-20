@@ -40,11 +40,28 @@ function clear() {
 }
 
 function writeValue(value, option = "a") {
+    let formattedValue =
+        typeof value === "number" && !Number.isInteger(value)
+            ? shortenFloat(value)
+            : value;
     if (option == "w") {
-        displayValue.textContent = value;
+        displayValue.textContent = formattedValue;
     } else if (option == "a") {
-        displayValue.textContent += value;
+        displayValue.textContent += formattedValue;
     }
+}
+
+function shortenFloat(number) {
+    let fixedLenNumber = number.toFixed(4);
+    let numString = fixedLenNumber.toString();
+    for (let i = numString.length - 1; i >= 0; i--) {
+        if (numString.charAt(i) === "0") {
+            numString = numString.substring(0, i);
+        } else if (numString.charAt(i) === ".") {
+            break;
+        }
+    }
+    return numString;
 }
 
 function parseOperator(operatorString) {
