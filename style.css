@@ -45,6 +45,7 @@ body {
     display: flex;
     justify-content: end;
     align-items: center;
+    font-size: 5rem;
 }
 
 .calculator-grid div {
