@@ -12,7 +12,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    return a / b;
+    return (b !== 0) ? a / b : "ERROR";
 }
 
 // Perform operation between two numbers
