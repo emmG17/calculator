@@ -105,6 +105,7 @@ const operatorButtons = document.querySelectorAll(".calculator-grid .operator");
 const clearButton = document.getElementById("clear");
 const equalsButton = document.getElementById("enter");
 const maxOperators = 1;
+let clearOnNext = false;
 
 const currentExpression = {
     setFirstNumber: function (value) {
@@ -125,10 +126,17 @@ const currentExpression = {
 //Clear the display
 clearButton.addEventListener("click", clear);
 
-equalsButton.addEventListener("click", solveCurrentNode);
+equalsButton.addEventListener("click", () => {
+    solveCurrentNode();
+    clearOnNext = true;
+});
 
 numberButtons.forEach((number) => {
     number.addEventListener("click", () => {
+        if (clearOnNext) {
+            clear();
+            clearOnNext = false;
+        }
         let value = number.getAttribute("data-value");
         writeValue(value);
         parseInput();
@@ -137,6 +145,7 @@ numberButtons.forEach((number) => {
 
 operatorButtons.forEach((operator) => {
     operator.addEventListener("click", () => {
+        clearOnNext = false;
         if (currentExpression.operator) {
             solveCurrentNode();
         }
